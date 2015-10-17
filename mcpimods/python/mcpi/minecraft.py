@@ -163,6 +163,16 @@ class Minecraft:
         s = self.conn.sendReceive("world.getBlocks", intFloor(args))
         return map(int, s.split(","))
 
+    def getBlocks(self, *args):
+        """Get a cuboid of blocks (x0,y0,z0,x1,y1,z1) => [id]"""
+        s = self.conn.sendReceive("world.getBlocks", intFloor(args))
+        return map(int, s.split(","))
+
+    def getBlocksWithData(self, *args):
+        """Get a cuboid of blocks with data(x0,y0,z0,x1,y1,z1) => [id:data]"""
+        ans = self.conn.sendReceive("world.getBlocksWithData", intFloor(args))
+        return ans.split(",")
+
     def setBlock(self, *args):
         """Set block (x,y,z,id,[data])"""
         self.conn.send("world.setBlock", intFloor(args))
